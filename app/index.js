@@ -4,7 +4,7 @@
  * @flow
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
     StyleSheet,
     View,
@@ -16,27 +16,19 @@ import {
     Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            count: 0
-        };
-    }
-
-    render() {
-        return (
-            <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>You clicked {this.state.count} times</Text>
-                <Button style={styles.button}
-                    onPress={() => {
-                        this.setState({ count: this.state.count + 1 })
-                    }}
-                    title="Press Me"
-                />
-            </View>
-        );
-    }
+function App() {
+    const [count, setCount] = useState(0);
+    return (
+        <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>You clicked {count} times</Text>
+            <Button style={styles.button}
+                onPress={() => {
+                    setCount(count + 1)
+                }}
+                title="Press Me"
+            />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
