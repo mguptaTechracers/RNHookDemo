@@ -17,21 +17,20 @@ import {
     Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import { useNavigation } from '@react-navigation/native';
+import { useFriendStatus } from '../../useFriendStatus';
 
 function DetailScreen() {
     const navigation = useNavigation();
-
-    function onPressGoBackButton() {
+    const isOnline = useFriendStatus(123);
+    function onPressOnGoBack() {
         navigation.goBack();
     }
-
     return (
         <View style={styles.sectionContainer}>
-            <Text style={styles.sectionTitle}>This is DetailScreen</Text>
-
+            <Text style={[{ color: isOnline ? '#198962' : '#3E4341' }, styles.sectionTitle]}> Alias </Text>
             <Button style={styles.button}
-                onPress={() => onPressGoBackButton()}
                 title="Go Back"
+                onPress={() => onPressOnGoBack()}
             />
         </View>
     );
@@ -47,7 +46,6 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 24,
         fontWeight: '600',
-        color: Colors.black,
     },
     button: {
         marginTop: 8,
