@@ -17,7 +17,7 @@ import {
     Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-class HomeScreen extends React.Component {
+class DetailScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,22 +26,17 @@ class HomeScreen extends React.Component {
     }
 
     onPressLoginButton(){
-        this.props.navigation.navigate('login');
+        this.props.navigation.goBack();
     }
 
     render() {
         return (
             <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>You clicked {this.state.count} times</Text>
-                <Button style={styles.button}
-                    onPress={() => {
-                        this.setState({ count: this.state.count + 1 })
-                    }}
-                    title="Press Me"
-                />
+                <Text style={styles.sectionTitle}>This is DetailScreen</Text>
+            
                 <Button style={styles.button}
                     onPress={() => this.onPressLoginButton()}
-                    title="Go To Login"
+                    title="Go Back"
                 />
             </View>
         );
@@ -67,5 +62,5 @@ const styles = StyleSheet.create({
     },
 });
 
-export default HomeScreen;
+export default DetailScreen;
 
