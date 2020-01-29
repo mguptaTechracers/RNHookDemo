@@ -21,12 +21,33 @@ class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            count: 0
+            count: 0,
+            timer: 1,
         };
     }
+    componentDidMount() {
+        this.interval = setInterval(
+            () => this.setState((prevState) => ({ timer: prevState.timer + 1 })),
+            1000
+        );
+    }
 
-    onPressLoginButton(){
-        this.props.navigation.navigate('login');
+    componentDidUpdate() {
+        if (this.state.timer === 1) {
+            clearInterval(this.interval);
+        }
+    }
+
+    componentWillUnmount() {
+        console.log("================= componentWillUnmount ===========")
+        console.log("=================  clearInterval ===========")
+
+        clearInterval(this.interval);
+        this.setState({ timer: 1 });
+    }
+
+    onPressLoginButton() {
+        this.props.navigation.replace('login');
     }
 
     render() {
@@ -43,6 +64,8 @@ class HomeScreen extends React.Component {
                     onPress={() => this.onPressLoginButton()}
                     title="Go To Login"
                 />
+
+                <Text style={styles.sectionTitle}> Time {this.state.timer} seconds </Text>
             </View>
         );
     }
