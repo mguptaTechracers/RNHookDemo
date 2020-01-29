@@ -16,32 +16,27 @@ import {
 import {
     Colors,
 } from 'react-native/Libraries/NewAppScreen';
+import { useNavigation } from '@react-navigation/native';
 
-class DetailScreen extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            count: 0
-        };
+function DetailScreen() {
+    const navigation = useNavigation();
+
+    function onPressGoBackButton() {
+        navigation.goBack();
     }
 
-    onPressLoginButton(){
-        this.props.navigation.goBack();
-    }
+    return (
+        <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>This is DetailScreen</Text>
 
-    render() {
-        return (
-            <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>This is DetailScreen</Text>
-            
-                <Button style={styles.button}
-                    onPress={() => this.onPressLoginButton()}
-                    title="Go Back"
-                />
-            </View>
-        );
-    }
+            <Button style={styles.button}
+                onPress={() => onPressGoBackButton()}
+                title="Go Back"
+            />
+        </View>
+    );
 }
+
 
 const styles = StyleSheet.create({
     sectionContainer: {

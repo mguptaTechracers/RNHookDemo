@@ -5,7 +5,7 @@
  * @flow
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
     StyleSheet,
     View,
@@ -17,36 +17,34 @@ import {
     Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-class HomeScreen extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            count: 0
-        };
+import { useNavigation } from '@react-navigation/native';
+
+function HomeScreen() {
+    const [count, setCount] = useState(0);
+    const navigation = useNavigation();
+
+    function onPressLoginButton() {
+        navigation.navigate('login');
     }
 
-    onPressLoginButton(){
-        this.props.navigation.navigate('login');
-    }
 
-    render() {
-        return (
-            <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>You clicked {this.state.count} times</Text>
-                <Button style={styles.button}
-                    onPress={() => {
-                        this.setState({ count: this.state.count + 1 })
-                    }}
-                    title="Press Me"
-                />
-                <Button style={styles.button}
-                    onPress={() => this.onPressLoginButton()}
-                    title="Go To Login"
-                />
-            </View>
-        );
-    }
+    return (
+        <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>You clicked {count} times</Text>
+            <Button style={styles.button}
+                onPress={() => {
+                    setCount(count + 1)
+                }}
+                title="Press Me"
+            />
+            <Button style={styles.button}
+                onPress={() => onPressLoginButton()}
+                title="Go To Login"
+            />
+        </View>
+    );
 }
+
 
 const styles = StyleSheet.create({
     sectionContainer: {

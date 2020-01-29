@@ -8,12 +8,27 @@
  */
 
 import React from 'react';
-import Routes from './Routes';
+import LoginScreen from "./component/LoginScreen";
+import HomeScreen from "./component/HomeScreen";
+import DetailScreen from "./component/DetailScreen";
 
-const App = () => {
+
+import { NavigationNativeContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+
+const Stack = createStackNavigator();
+
+function App() {
   return (
-    <Routes />
+    <NavigationNativeContainer>
+      <Stack.Navigator initialRouteName="home" headerMode= 'none'>
+        <Stack.Screen name="home" component={HomeScreen} />
+        <Stack.Screen name="login" component={LoginScreen} />
+        <Stack.Screen name="detail" component={DetailScreen} />
+      </Stack.Navigator>
+    </NavigationNativeContainer>
   );
-};
+}
 
 export default App;
