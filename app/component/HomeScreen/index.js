@@ -5,7 +5,7 @@
  * @flow
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     StyleSheet,
     View,
@@ -21,12 +21,30 @@ import { useNavigation } from '@react-navigation/native';
 
 function HomeScreen() {
     const [count, setCount] = useState(0);
+    const [timer, setTimer] = useState(1);
+
     const navigation = useNavigation();
 
     function onPressLoginButton() {
-        navigation.navigate('login');
+        navigation.replace('login');
     }
 
+    useEffect(() => {
+        interval = setInterval(() => {
+            setTimer(timer => timer + 1);
+        }, 1000);
+
+        // Specify how to clean up after this effect:
+        // this will clearInterval when component unmont like in ComponentWillUnmount
+
+        return function cleanup() {
+            console.log("================= cleanup ===========")
+            console.log("=================  clearInterval ===========")
+            clearInterval(interval);
+            setTimer(1);
+        };
+    }, []);
+    // [] when we wants to execute ComponentWillUnmount/cleanup only once
 
     return (
         <View style={styles.sectionContainer}>
@@ -41,6 +59,7 @@ function HomeScreen() {
                 onPress={() => onPressLoginButton()}
                 title="Go To Login"
             />
+            <Text style={styles.sectionTitle}>Time {timer} seconds</Text>
         </View>
     );
 }
